@@ -89,11 +89,11 @@ key: e5a4411969
 `@instructions`
 How to replace the phone numbers not having exactly 10 digits with NA
 
-    c(99887766, 998877665521, 9897932453)
+    nums <- c(99887766, 998877665521, 9897932453)
 
 Expected output:
 
-    NA, NA, 9897932453
+    c(NA, NA, 9897932453)
 
 `@hint`
 Count characters or compare values, and assign `NA` to subelements or use `is.na<-`
@@ -103,9 +103,16 @@ Count characters or compare values, and assign `NA` to subelements or use `is.na
 ```{r}
 nums <- c(99887766, 998877665521, 9897932453, 989793453, 9897832453)
 
-# 
+# assign solution to res
+res <- ___
 ```
+`@solution`
+```{r}
+nums <- c(99887766, 998877665521, 9897932453, 989793453, 9897832453)
 
+# assign solution to res
+nums[nchar(nums) != 10] <- NA
+```
 
 
 
