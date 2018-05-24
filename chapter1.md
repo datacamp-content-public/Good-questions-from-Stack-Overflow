@@ -17,7 +17,7 @@ key: 04476f35ac
 
 [Credit: John, Ryan, Moody_Mudskipper][1]
 
-[1]: https://stackoverflow.com/questions/50516915/interlacing-two-vectors/50517503#50517503
+[1]: https://stackoverflow.com/questions/50516915/interlacing-two-vectors/50517503
 
 `@instructions`
 From two vectors such as those:
@@ -70,7 +70,7 @@ success_msg("Great! Check solution for more insights!")
 
 
 ---
-## Insert exercise title here
+## Assign NA to phone numbers of wrong digit length
 
 ```yaml
 type: NormalExercise
@@ -119,8 +119,119 @@ nums[nchar(nums) != 10] <- NA
 ```
 `@sct`
 ```{r}
-test_object("num")
+test_object("nums")
 success_msg("Great! Check solution for more insights!")
+```
+
+
+
+
+
+---
+## Reformat product lists into a wide table
+
+```yaml
+type: NormalExercise
+
+xp: 100
+
+key: bab9ee7da3
+```
+
+[Credit: Nikita Pronin,  Uwe][1]
+
+[1]: https://stackoverflow.com/questions/50464389/make-a-named-table-from-list-of-dataframes
+
+`@instructions`
+We have a one column `data.frame` containing ids of bundles of products:
+
+          bundle
+    1  284993459
+    2 1048768805
+    3  511310430
+    4 1034630958
+    5 1235581326
+
+And a list of `data.frames` as long as the above `data.frame` has rows, each item contains the ids of the products contained in the corresponding bundle, and it value :
+
+    [[1]]
+        id value
+    1   35   0.2
+    2 1462   0.2
+    3 1109   0.2
+    4  220   0.2
+    5  211   0.1
+    
+    [[2]]
+    list()
+    
+    [[3]]
+        id name value
+    1  394        0.5
+    2 1462        0.5
+    
+    [[4]]
+        id name value
+    1  926        0.3
+    2 1462        0.3
+    3  381        0.3
+    4  930        0.2
+    
+    [[5]]
+        id name value
+    1  926        0.5
+    2 1462        0.5
+    
+
+We want to build a wide format `data.frame` that will describe the content of each bundle so the output will be the following:
+
+        bundle  35 211 220 381 394 926 930 1109 1462
+     284993459 0.2 0.1 0.2 0.0 0.0 0.0 0.0  0.2  0.2
+     511310430 0.0 0.0 0.0 0.0 0.5 0.0 0.0  0.0  0.5
+    1034630958 0.0 0.0 0.0 0.3 0.0 0.3 0.2  0.0  0.3
+    1048768805 0.0 0.0 0.0 0.0 0.0 0.0 0.0  0.0  0.0
+    1235581326 0.0 0.0 0.0 0.0 0.0 0.5 0.0  0.0  0.5
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+library(data.table)
+```
+`@sample_code`
+```{r}
+bundle_df =  data.frame(bundle =  c(284993459,1048768805,511310430,1034630958,1235581326))
+products <- list(data.frame(id = c(35,1462,1109,220,211), value = c(0.2, 0.2, 0.2,0.2,0.1)), 
+                 data.frame(id = NULL, value = NULL), 
+                 data.frame(id = c(394,1462), value = c(0.5,0.5)),
+                 data.frame(id = c(926,1462,381,930), value = c(0.3,0.3,0.3,0.2)),
+                 data.frame(id = c(926,1462), value = c(0.5,0.5)))
+
+# assign solution to res
+res <- ___
+```
+`@solution`
+```{r}
+bundle_df =  data.frame(bundle =  c(284993459,1048768805,511310430,1034630958,1235581326))
+products <- list(data.frame(id = c(35,1462,1109,220,211), value = c(0.2, 0.2, 0.2,0.2,0.1)), 
+                 data.frame(id = NULL, value = NULL), 
+                 data.frame(id = c(394,1462), value = c(0.5,0.5)),
+                 data.frame(id = c(926,1462,381,930), value = c(0.3,0.3,0.3,0.2)),
+                 data.frame(id = c(926,1462), value = c(0.5,0.5)))
+
+# assign solution to res
+res <- dcast(
+  rbindlist(products, id = "bid")[setDT(bundle_df)[, bid := .I], on = "bid"], 
+  bundle ~ id, fill = 0
+  )[, "NA" := NULL][]
+
+res <- as.data.frame(res)
+```
+`@sct`
+```{r}
+test_object("res")
+success_msg("Great! Check source for more insights!")
 ```
 
 
