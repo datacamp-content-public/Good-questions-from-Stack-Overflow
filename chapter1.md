@@ -1,62 +1,71 @@
 ---
 title: Template Chapter 1
-description: This is a template chapter.
----
+description: >-
+  This is a template chapter.
 
-## Ex 1.1
+
+---
+## Interlacing two vectors
 
 ```yaml
 type: NormalExercise
 lang: r
 xp: 100
 skills: 1
-key: 297ea3bd6b
+key: 04476f35ac
 ```
 
-This is the assignment text. It should help provide students with the background information needed.
-The instructions that follow should be in bullet point form with clear guidance for what is expected.
+[Credit: John, Ryan, Moody_Mudskipper][1]
+
+[1]: https://stackoverflow.com/questions/50516915/interlacing-two-vectors/50517503#50517503
 
 `@instructions`
-- Instruction 1
-- Instruction 2
-- Instruction 3
-- Instruction 4
+From two vectors such as those:
+
+    a <- c("a1", "a2", "a3")
+    b <- c("b1", "b2", "b3")
+
+Build the following one, alternating elements from `a` and `b` :
+
+    c("a1","b1", "a2", "b2", "a3", "b3")
 
 `@hint`
-- Here is the hint for this setup problem. It should get students 50% of the way to the correct answer.
+- One way could be to build a matrix then flatten it
 
-`@pre_exercise_code`
-
-```{r}
-# Load datasets and packages here.
-```
 
 `@sample_code`
-
 ```{r}
-# Your
-# sample
-# code
-# should
-# be
-# ideally
-# 10 lines or less,
-# with a max
-# of 16 lines.
-```
+x <- paste0("x",1:20)
+y <- paste0("y",1:20)
 
+# assign solution to res
+res <- ___
+```
 `@solution`
-
 ```{r}
-# Answer goes here
-# Make sure to match the comments with your sample code
-# to help students see the differences from solution
-# to given.
+x <- paste0("x",1:20)
+y <- paste0("y",1:20)
+
+# assign solution to res
+res <- as.vector(rbind(x,y))
+
+# compare to other possible solutions, sorted by increasing execution time
+# note that as.vector is faster than c
+# See source for benchmark
+
+# c(rbind(a,b))
+# c(rbind(a,b))
+# c(matrix(c(a,b),ncol=length(a),,T))
+# c(a,b)[rep(1:length(a),each=2)+c(0,length(a))]
+# c(mapply(c,a,b))
 ```
-
 `@sct`
-
 ```{r}
 # Update this to something more informative.
-success_msg("Some praise! Then reinforce a learning objective from the exercise.")
+test_object("res")
+success_msg("Great! Check solution for more insights!")
+print("hello")
 ```
+
+
+
