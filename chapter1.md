@@ -61,10 +61,8 @@ res <- as.vector(rbind(x,y))
 ```
 `@sct`
 ```{r}
-# Update this to something more informative.
 test_object("res")
 success_msg("Great! Check solution for more insights!")
-print("hello")
 ```
 
 
@@ -98,20 +96,29 @@ Expected output:
 `@hint`
 Count characters or compare values, and assign `NA` to subelements or use `is.na<-`
 
-
+`@pre_exercise_code`
+```{r}
+test_object("num")
+success_msg("Great! Check solution for more insights!")
+```
 `@sample_code`
 ```{r}
 nums <- c(99887766, 998877665521, 9897932453, 989793453, 9897832453)
 
-# assign solution to res
-res <- ___
+# modify nums to replace relevant elements by NA
+___
 ```
 `@solution`
 ```{r}
 nums <- c(99887766, 998877665521, 9897932453, 989793453, 9897832453)
 
-# assign solution to res
+# modify nums to replace relevant elements by NA
 nums[nchar(nums) != 10] <- NA
+
+# Other possible solutions:
+# is.na(nums) <- log10(nums) >= 10 | log10(nums) < 9
+# is.na(nums) <- nums) >= 1e10 | nums < 1e9
+# ifelse(nchar(nums) != 10, NA, nums)
 ```
 
 
