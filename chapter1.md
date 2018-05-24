@@ -69,3 +69,44 @@ print("hello")
 
 
 
+
+
+---
+## Insert exercise title here
+
+```yaml
+type: NormalExercise
+
+xp: 100
+
+key: e5a4411969
+```
+
+[Credit: Krishna, akrun, Roland, Rui Barradas, DJV][1]
+
+[1]: https://stackoverflow.com/questions/50501950/replace-the-phone-numbers-not-having-exactly-10-digits
+
+`@instructions`
+How to replace the phone numbers not having exactly 10 digits with NA
+
+    c(99887766, 998877665521, 9897932453)
+
+Expected output:
+
+    NA, NA, 9897932453
+
+`@hint`
+Count characters or compare values, and assign `NA` to subelements or use `is.na<-`
+
+
+`@sample_code`
+```{r}
+nums <- c(99887766, 998877665521, 9897932453, 989793453, 9897832453)
+
+# 
+```
+
+
+
+
+
