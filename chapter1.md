@@ -1,5 +1,5 @@
 ---
-title: Template Chapter 1
+title: Data Wrangling
 description: >-
   This is a template chapter.
 
@@ -195,10 +195,7 @@ We want to build a wide format `data.frame` that will describe the content of ea
 `@hint`
 
 
-`@pre_exercise_code`
-```{r}
-library(dplyr)
-```
+
 `@sample_code`
 ```{r}
 bundle_df =  data.frame(bundle =  c(284993459,1048768805,511310430,1034630958,1235581326))
@@ -237,7 +234,7 @@ success_msg("Great! Check source for more insights!")
 
 
 ---
-## Insert exercise title here
+## Capitalize the first letter of all vector elements
 
 ```yaml
 type: NormalExercise
@@ -247,17 +244,49 @@ xp: 100
 key: cb512dd36f
 ```
 
+[Credit: hariharan s, akrun, Moody_Mudskipper, Prany][1]
+
+[1]: https://stackoverflow.com/questions/50425489/how-to-capitalise-the-first-character-of-a-value-for-selected-values-in-a-column
+
+
+`@instructions`
+starting from :
+
+    vec <-  c("foo", "Bar", "bAz", "FOO", bar", "BaZ")
+
+We want to get the following output :
+
+    [1] "Foo", "Bar", "BAz", "FOO", Bar", "BaZ"
+
+`@hint`
 
 
 
-
-`@pre_exercise_code`
+`@sample_code`
 ```{r}
-library(ggplot2)
+vec <-  c("foo", "Bar", "bAz", "FOO", "bar", "BaZ", NA)
+
+# modify vec to get desired output
+___
 ```
+`@solution`
+```{r}
+vec <-  c("foo", "Bar", "bAz", "FOO", "bar", "BaZ", NA)
+
+# modify vec to get desired output
+substr(vec,1,1) <- toupper(substr(vec,1,1))
+
+# other solutions:
+# vec <- sub("^(.)", "\\U\\1", vec, perl = TRUE)
+# vec <- Hmisc::capitalize(vec)
 
 
-
+```
+`@sct`
+```{r}
+test_object("vec")
+success_msg("Great! Check source for more insights!")
+```
 
 
 
