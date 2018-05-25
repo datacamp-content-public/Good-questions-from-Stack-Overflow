@@ -1,7 +1,7 @@
 ---
 title: Data Wrangling
 description: >-
-  This is a template chapter.
+  
 
 
 ---
@@ -192,8 +192,6 @@ We want to build a wide format `data.frame` that will describe the content of ea
     1048768805 0.0 0.0 0.0 0.0 0.0 0.0 0.0  0.0  0.0
     1235581326 0.0 0.0 0.0 0.0 0.0 0.5 0.0  0.0  0.5
 
-`@hint`
-
 
 
 `@sample_code`
@@ -248,7 +246,6 @@ key: cb512dd36f
 
 [1]: https://stackoverflow.com/questions/50425489/how-to-capitalise-the-first-character-of-a-value-for-selected-values-in-a-column
 
-
 `@instructions`
 starting from :
 
@@ -257,8 +254,6 @@ starting from :
 We want to get the following output :
 
     [1] "Foo", "Bar", "BAz", "FOO", Bar", "BaZ"
-
-`@hint`
 
 
 
@@ -279,8 +274,6 @@ substr(vec,1,1) <- toupper(substr(vec,1,1))
 # other solutions:
 # vec <- sub("^(.)", "\\U\\1", vec, perl = TRUE)
 # vec <- Hmisc::capitalize(vec)
-
-
 ```
 `@sct`
 ```{r}
