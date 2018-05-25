@@ -138,10 +138,59 @@ xp: 100
 key: bab9ee7da3
 ```
 
+[Credit: Nikita Pronin,  Uwe][1]
 
+[1]: https://stackoverflow.com/questions/50464389/make-a-named-table-from-list-of-dataframes
 
 `@instructions`
+We have a one column `data.frame` containing ids of bundles of products:
 
+          bundle
+    1  284993459
+    2 1048768805
+    3  511310430
+    4 1034630958
+    5 1235581326
+
+And a list of `data.frames` as long as the above `data.frame` has rows, each item contains the ids of the products contained in the corresponding bundle, and it value :
+
+    [[1]]
+        id value
+    1   35   0.2
+    2 1462   0.2
+    3 1109   0.2
+    4  220   0.2
+    5  211   0.1
+    
+    [[2]]
+    list()
+    
+    [[3]]
+        id name value
+    1  394        0.5
+    2 1462        0.5
+    
+    [[4]]
+        id name value
+    1  926        0.3
+    2 1462        0.3
+    3  381        0.3
+    4  930        0.2
+    
+    [[5]]
+        id name value
+    1  926        0.5
+    2 1462        0.5
+    
+
+We want to build a wide format `data.frame` that will describe the content of each bundle so the output will be the following:
+
+        bundle  35 211 220 381 394 926 930 1109 1462
+     284993459 0.2 0.1 0.2 0.0 0.0 0.0 0.0  0.2  0.2
+     511310430 0.0 0.0 0.0 0.0 0.5 0.0 0.0  0.0  0.5
+    1034630958 0.0 0.0 0.0 0.3 0.0 0.3 0.2  0.0  0.3
+    1048768805 0.0 0.0 0.0 0.0 0.0 0.0 0.0  0.0  0.0
+    1235581326 0.0 0.0 0.0 0.0 0.0 0.5 0.0  0.0  0.5
 
 `@hint`
 
@@ -150,11 +199,32 @@ key: bab9ee7da3
 ```{r}
 library(dplyr)
 ```
+`@sample_code`
+```{r}
+bundle_df =  data.frame(bundle =  c(284993459,1048768805,511310430,1034630958,1235581326))
+products <- list(data.frame(id = c(35,1462,1109,220,211), value = c(0.2, 0.2, 0.2,0.2,0.1)), 
+                 data.frame(id = NULL, value = NULL), 
+                 data.frame(id = c(394,1462), value = c(0.5,0.5)),
+                 data.frame(id = c(926,1462,381,930), value = c(0.3,0.3,0.3,0.2)),
+                 data.frame(id = c(926,1462), value = c(0.5,0.5)))
 
+# assign solution to res
+res <- ___
+```
 `@solution`
 ```{r}
+bundle_df =  data.frame(bundle =  c(284993459,1048768805,511310430,1034630958,1235581326))
+products <- list(data.frame(id = c(35,1462,1109,220,211), value = c(0.2, 0.2, 0.2,0.2,0.1)), 
+                 data.frame(id = NULL, value = NULL), 
+                 data.frame(id = c(394,1462), value = c(0.5,0.5)),
+                 data.frame(id = c(926,1462,381,930), value = c(0.3,0.3,0.3,0.2)),
+                 data.frame(id = c(926,1462), value = c(0.5,0.5)))
 
-
+# assign solution to res
+res <- NA
+# res <- map2_dfr(bundle$bundle,d2,~mutate(.y,bundle=.x)) %>%
+#   spread(id,value,)
+# res[is.na(res)] <- 0
 ```
 `@sct`
 ```{r}
@@ -179,10 +249,6 @@ key: cb512dd36f
 
 
 
-`@instructions`
-
-
-`@hint`
 
 
 `@pre_exercise_code`
